@@ -3,7 +3,7 @@
 
 def question_mark_search(string, pattern, lazy):
 
-    print('debug: pattern=%r' % pattern)
+    print('qms:debug. pattern=%r' % pattern)
 
     match_pos = -1
     p_len = len(pattern)
@@ -41,7 +41,9 @@ def naive_wildcard_search(string, pattern, lazy):
 
     if pattern.find('*') >= 0:
         for i in range(len(string) - 1):
-            return naive_wildcard_search(string, pattern.replace('*','?'*i,1), lazy)
+            temp_pattern = pattern.replace('*','?'*i,1)
+            print('nws:debug. current pattern is %r' % temp_pattern)
+            return naive_wildcard_search(string, temp_pattern, lazy)
     else:
         return question_mark_search(string, pattern, lazy)
 
@@ -49,7 +51,7 @@ def naive_wildcard_search(string, pattern, lazy):
 
 ### __main__() ###
 
-my_str    = 'abcd'
+my_str    = 'abcdefg'
 my_pattern = 'b*'
 
 rc = naive_wildcard_search(my_str, my_pattern,True)
