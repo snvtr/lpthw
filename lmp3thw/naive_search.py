@@ -1,6 +1,5 @@
 #!C:/Python37/python3.exe
 
-
 def question_mark_search(string, pattern, lazy):
 
     print('qms:debug. pattern=%r' % pattern)
@@ -29,32 +28,14 @@ def question_mark_search(string, pattern, lazy):
             return i
 
     return match_pos
-    
 
-def naive_wildcard_search(string, pattern, lazy):
-    """
-        searches the string 'string' for the pattern 'pattern'
-        with wildcards like '?' (single character) and '*' (any number of characters including none)
-        
-        if lazy == True than stops at the first encounter, otherwise goes on to the end of the 'string'
-    """    
-
-    if pattern.find('*') >= 0:
-        for i in range(len(string) - 1):
-            temp_pattern = pattern.replace('*','?'*i,1)
-            print('nws:debug. current pattern is %r' % temp_pattern)
-            return naive_wildcard_search(string, temp_pattern, lazy)
-    else:
-        return question_mark_search(string, pattern, lazy)
-
-        
 
 ### __main__() ###
 
-my_str    = 'abcdefg'
-my_pattern = 'b*'
+my_str    = 'zabcefgbe'
+my_pattern = '?b?e'
 
-rc = naive_wildcard_search(my_str, my_pattern,True)
+rc = question_mark_search(my_str, my_pattern, True)
 
 if rc >= 0:
     print('strings %s and %s has a match at position %i' % (my_str, my_pattern, rc))
