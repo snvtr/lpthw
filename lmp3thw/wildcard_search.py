@@ -41,17 +41,14 @@ def decode_matrix(M,string):
         qm_cnt = 0
         for x in range(pos, 0, -1):
             if M[y][x] == 'x':
-                print(string[x-1])
                 Result.insert(0,string[x-1])
                 pos = x - 1
                 break
             if M[y][x] == '*':
-                print(string[x-1])
                 Result.insert(0,string[x-1])
                 pos = x - 1
             if M[y][x] == '?' and qm_cnt == 0:
                 qm_cnt += 1
-                print(string[x-1])
                 Result.insert(0,string[x-1])
                 pos = x - 1
                 break
