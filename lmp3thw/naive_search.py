@@ -2,6 +2,10 @@
 
 def question_mark_search(string, pattern, lazy):
 
+    """
+    наивный поиск с использованием wildcard символа '?'
+    """
+
     print('qms:debug. pattern=%r' % pattern)
 
     match_pos = -1
