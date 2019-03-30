@@ -3,7 +3,7 @@
 def question_mark_search(string, pattern, lazy):
 
     """
-    наивный поиск с использованием wildcard символа '?'
+    РЅР°РёРІРЅС‹Р№ РїРѕРёСЃРє СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј wildcard СЃРёРјРІРѕР»Р° '?'
     """
 
     print('qms:debug. pattern=%r' % pattern)
