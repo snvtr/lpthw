@@ -20,8 +20,8 @@ def build_matrix(string, pattern):
                 pos = s + 1
                 M[p][s] = 'x'
                 
-    for p in range(len_p):
-        print(M[p])
+#    for p in range(len_p):
+#        print(M[p])
 
     return M
 
@@ -30,6 +30,10 @@ def decode_matrix(M,string):
     """
     собирает строку в виде списка символов, совпавшую с образом для поиска
     """
+
+# в считывании массива ошибка. 
+# При считывании строки с '?' надо проверять количество считанных позиций,
+# и учитывать только последнюю
 
     len_s = len(M[0]) - 1
     len_p = len(M) - 1
@@ -47,13 +51,18 @@ def decode_matrix(M,string):
             if M[y][x] == '*':
                 Result.insert(0,string[x-1])
                 pos = x - 1
-            if M[y][x] == '?' and qm_cnt == 0:
+            if M[y][x] == '?' and M[y][x-1] == '.':#qm_cnt == 0:
                 qm_cnt += 1
                 Result.insert(0,string[x-1])
                 pos = x - 1
                 break
 
     return Result
-                
-Match = build_matrix('abcxyzy','c*x?z')
-print(''.join(decode_matrix(Match,'abcxyzy')))
+
+def wildcard_search(string, pattern):
+    Match = build_matrix(string, pattern)
+    return ''.join(decode_matrix(Match, string))
+
+#my_str     = 'abcdefg'
+#my_pattern = 'c*f'
+#print(wildcard_search(my_str, my_pattern))
