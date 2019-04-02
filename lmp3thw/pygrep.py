@@ -63,13 +63,13 @@ parser.add_argument('grep_pattern', help='GREP_PATTERN to find', action='store')
 parser.add_argument('file_pattern', help='filename FILE_PATTERN', action='store')
 args = parser.parse_args()
 
-print('debug:', vars(args))
+#print('debug:', vars(args))
 
 compiled_pattern = re.compile(args.grep_pattern)
 tree = os.walk('.', topdown=True)
 
 for i in tree:
-    print('debug:',i)
+    #print('debug:',i)
     if not args.recursive:
         i[1][:] = [] # зануление массива dirnames приводит к тому, что os.walk не идет вниз по дереву каталогов
     for file in i[2]:
