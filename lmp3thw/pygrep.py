@@ -26,21 +26,32 @@ def check_wildcard(filename, pattern):
 
 def grep(file, pattern):
 
+    global compiled_pattern
     matches = []
 
-    print('debug: opening file %s to look for %r' % (file, pattern))
+#    print('debug: opening file %s to look for %r' % (file, pattern))
 
     try:
         fd = open(file, 'r')
     except:
         print('cannot open file %s for reading. skipped' % file)
+        return
 
+    line_count = 1
     for line in fd:
-        pass
+        output = ''
+        if compiled_pattern.search(line) is not None:
+            #print('debug: filename: %r line count: %r matched line: %r' % (file, line_count, line))
+            if args.filename:
+                output = file + ': '
+            if args.line_number:
+                output += str(line_count) + ': '
+            output += line
+            print(output.rstrip())
+            line_count += 1
 
     fd.close()
-
-    return matches
+    return
 
 ### __main__()
 
@@ -54,18 +65,14 @@ args = parser.parse_args()
 
 print('debug:', vars(args))
 
+compiled_pattern = re.compile(args.grep_pattern)
 tree = os.walk('.', topdown=True)
 
 for i in tree:
     print('debug:',i)
-#    if not args.recursive:
-#        i[1] = []
+    if not args.recursive:
+        i[1][:] = [] # зануление массива dirnames приводит к тому, что os.walk не идет вниз по дереву каталогов
     for file in i[2]:
         if check_wildcard(file, args.file_pattern):
             # тут можно уже разворачивать поиск внутри файла
-            matching_lines = grep(file, args.grep_pattern)
-            for i in matching_lines:
-                if args.filename:
-                    print(': '.join([file, i]))
-                else:
-                    print(i)
+            rc = grep(i[0]+'\\'+file, args.grep_pattern)
