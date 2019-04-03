@@ -13,8 +13,8 @@ def parse_characters(arg_str):
         Temp2 = temp1.split('-')
         if Temp2[1] == '':
             Temp2[1] = '254'
-            for i in range(int(Temp2[0]), int(Temp2[1])+1):
-                Characters[i] = 1
+        for i in range(int(Temp2[0]), int(Temp2[1])+1):
+            Characters[i] = 1
 
 def parse_fields(arg_str):
     Temp1 = arg_str.split(',')
@@ -22,8 +22,8 @@ def parse_fields(arg_str):
         Temp2 = temp1.split('-')
         if Temp2[1] == '':
             Temp2[1] = '254'
-            for i in range(int(Temp2[0]), int(Temp2[1])+1):
-                Fields[i] = 1
+        for i in range(int(Temp2[0]), int(Temp2[1])+1):
+            Fields[i] = 1
 
 def cut_chars(char_pattern):
     pass
@@ -50,5 +50,7 @@ Fields = [0] * 255
 
 if args.characters == -1:
     parse_fields(args.fields[0])
+    print(Fields)
 else:
     parse_characters(args.fields[0])
+    print(Characters)
