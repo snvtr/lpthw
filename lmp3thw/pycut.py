@@ -8,6 +8,7 @@ import os, sys, argparse
 ### __defs__ ###
 
 def parse_characters(arg_str):
+    """ заполняет массив символов, которые будут вырезаться """
     Temp1 = arg_str.split(',')
     for temp1 in Temp1:
         Temp2 = temp1.split('-')
@@ -16,20 +17,32 @@ def parse_characters(arg_str):
         for i in range(int(Temp2[0]), int(Temp2[1])+1):
             Characters[i] = 1
 
-def parse_fields(arg_str):
+def parse_cut_params(arg_str):
+    """ заполняет массив для полей которые будут вырезаться """
+    Temp0 = [0] * 255
     Temp1 = arg_str.split(',')
     for temp1 in Temp1:
         Temp2 = temp1.split('-')
         if Temp2[1] == '':
             Temp2[1] = '254'
         for i in range(int(Temp2[0]), int(Temp2[1])+1):
-            Fields[i] = 1
+            Temp0[i] = 1
+    return Temp0
 
-def cut_chars(char_pattern):
-    pass
+def cut_chars(chars, filename):
+    """ для каждой строки из файла собираем результирующую строку по маске из chars """
+    try:
+        with open(filename,'r') as f:
+            for line in f:
+                pass # проверяем каждый символ и собираем строку
+    except:
+        print('Cannot open the file %r' % filename)
+        sys.exit(1)
+    return True
 
-def cut_fields(field_pattern):
-    pass
+def cut_fields(fields, delim, filename):
+    """ для каждой строки из файла собираем поля порезанные по delim и списку полученных полей из fields """
+    return True
 
 ### __main__ ###
 
@@ -44,13 +57,9 @@ args = parser.parse_args()
 # fill the Characters/Fields with values:
 print('debug:',vars(args))
 
-# maximal number of characters and fields is 255:
-Characters = [0] * 255
-Fields = [0] * 255
-
 if args.characters == -1:
-    parse_fields(args.fields[0])
-    print(Fields)
+    Fields = parse_cut_params(args.fields[0])
+    print('debug:', Fields)
 else:
-    parse_characters(args.fields[0])
-    print(Characters)
+    Characters = parse_cut_params(args.characters[0])
+    print('debug:', Characters)
