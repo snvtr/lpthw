@@ -23,22 +23,23 @@ def parse_cut_params(arg_str):
 
 def cut_chars(Chars, filename):
     """ для каждой строки из файла собираем результирующую строку по маске из chars """
-    try:
-        with open(filename, 'r') as f:
+#    try:
+    cut_line = []
+    with open(filename, 'r') as f:
+        for line in f:
             cut_line[:] = []
-            for line in f:
-                if len(line) > 254:
-                    line_len = 254
-                else:
-                    line_len = len(line)
-                for char_idx in range(line_len):
-                    if Chars[char_idx+1] == 1:
-                        print('Char %r is added to the list' % line[char_idx])
-                        cut_line.append(line[char_idx:char_idx+1])
-                print('debug. joined cut string:', ''.join(cut_line), '\n')
-    except:
-        print('Cannot open file %s' % filename)
-        sys.exit(1)
+            if len(line.rstrip()) > 254:
+                line_len = 254
+            else:
+                line_len = len(line.rstrip())
+            for char_idx in range(line_len):
+                if Chars[char_idx+1] == 1:
+                    print('Char %r is added to the list' % line[char_idx])
+                    cut_line.append(line[char_idx:char_idx+1])
+            print('debug. joined cut string:', ''.join(cut_line), '\n')
+ #   except:
+ #       print('Cannot open file %s' % filename)
+ #       sys.exit(1)
 
     return True
 
