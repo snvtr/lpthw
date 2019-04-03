@@ -29,4 +29,8 @@ group.add_argument('-f', '--fields', help='fields to print out: like f1,f3,f4- o
 parser.add_argument('filename', help='filename to cut', action='store')
 args = parser.parse_args()
 
+# maximal number of characters and fields is 255:
+Characters = [0] * 255
+Fields = [0] * 255
 
+# fill the Characters/Fields with values:
