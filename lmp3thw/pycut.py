@@ -67,9 +67,9 @@ print('debug:',vars(args))
 
 if args.characters == -1:
     Filter = parse_cut_params(args.fields[0])
-#    print('debug:', Filter)
+    print('debug:', Filter)
     cut_fields(Filter, args.delimiter, args.filename)
 else:
     Filter = parse_cut_params(args.characters[0])
-#    print('debug:', Filter)
+    print('debug:', Filter)
     cut_chars(Filter, args.filename)
