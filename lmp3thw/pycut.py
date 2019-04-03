@@ -7,30 +7,42 @@ import os, sys, argparse
 
 ### __defs__ ###
 
-def parse_characters(arg_str):
-    """ заполняет массив символов, которые будут вырезаться """
-    Temp1 = arg_str.split(',')
-    for temp1 in Temp1:
-        Temp2 = temp1.split('-')
-        if Temp2[1] == '':
-            Temp2[1] = '254'
-        for i in range(int(Temp2[0]), int(Temp2[1])+1):
-            Characters[i] = 1
-
 def parse_cut_params(arg_str):
     """ заполняет массив для полей которые будут вырезаться """
     Temp0 = [0] * 255
     Temp1 = arg_str.split(',')
+#    print('debug. split by comma:', Temp1)
     for temp1 in Temp1:
         Temp2 = temp1.split('-')
+#        print('debug. split by hyphen:', Temp2)
         if Temp2[1] == '':
             Temp2[1] = '254'
         for i in range(int(Temp2[0]), int(Temp2[1])+1):
             Temp0[i] = 1
     return Temp0
 
-def cut_chars(chars, filename):
+def cut_chars(Chars, filename):
     """ для каждой строки из файла собираем результирующую строку по маске из chars """
+    try:
+        with open(filename, 'r') as f:
+            cut_line[:] = []
+            for line in f:
+                if len(line) > 254:
+                    line_len = 254
+                else:
+                    line_len = len(line)
+                for char_idx in range(line_len):
+                    if Chars[char_idx+1] == 1:
+                        cut_line.append(line[char_idx:char_idx+1])
+                print('debug. joined cut string:', ''.join(cut_line), '\n')
+    except:
+        print('Cannot open the file %s' % filename)
+        sys.exit(1)
+
+    return True
+
+def cut_fields(Fields, delim, filename):
+    """ для каждой строки из файла собираем поля порезанные по delim и списку полученных полей из fields """
     try:
         with open(filename,'r') as f:
             for line in f:
@@ -38,12 +50,8 @@ def cut_chars(chars, filename):
     except:
         print('Cannot open the file %r' % filename)
         sys.exit(1)
-    return True
 
-def cut_fields(fields, delim, filename):
-    """ для каждой строки из файла собираем поля порезанные по delim и списку полученных полей из fields """
     return True
-
 ### __main__ ###
 
 parser = argparse.ArgumentParser(description='lmt3thw-ex8: pygrep.py')
@@ -58,8 +66,10 @@ args = parser.parse_args()
 print('debug:',vars(args))
 
 if args.characters == -1:
-    Fields = parse_cut_params(args.fields[0])
-    print('debug:', Fields)
+    Filter = parse_cut_params(args.fields[0])
+#    print('debug:', Filter)
+    cut_fields(Filter, args.delimiter, args.filename)
 else:
-    Characters = parse_cut_params(args.characters[0])
-    print('debug:', Characters)
+    Filter = parse_cut_params(args.characters[0])
+#    print('debug:', Filter)
+    cut_chars(Filter, args.filename)
