@@ -33,10 +33,11 @@ def cut_chars(Chars, filename):
                     line_len = len(line)
                 for char_idx in range(line_len):
                     if Chars[char_idx+1] == 1:
+                        print('Char %r is added to the list' % line[char_idx])
                         cut_line.append(line[char_idx:char_idx+1])
                 print('debug. joined cut string:', ''.join(cut_line), '\n')
     except:
-        print('Cannot open the file %s' % filename)
+        print('Cannot open file %s' % filename)
         sys.exit(1)
 
     return True
