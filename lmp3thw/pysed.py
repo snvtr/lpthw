@@ -1,5 +1,7 @@
 #!C:/Python37/python3.exe
 
+# выполняет команду s/// подобно sed. Вывод либо в тот же файл, любо на консоль
+
 import os, sys, argparse
 import re
 
@@ -14,7 +16,10 @@ args = parser.parse_args()
 print(vars(args))
 
 try:
-    text_f = open(args.filename,'r')
+    if args.filename != '-':
+        text_f = open(args.filename,'r')
+    else:
+        text_f = sys.stdin
 except:
     print('cannot open file %s for reading' % args.filename)
 
@@ -26,14 +31,14 @@ for line in text_f:
     Cache.append(re.sub(commands[1], commands[2], line.rstrip()))
 text_f.close()
 
-if args.inplace:
-    try:
+try:
+    if args.inplace and args.filename != '-':
         text_f = open(args.filename,'w')
-    except:
-        print('cannot open file %s for writing' % args.filename)
+except:
+    print('cannot open file %s for writing' % args.filename)
     
 for line in Cache:
-    if args.inplace:
+    if args.inplace and args.filename != '-':
         print(line, file=text_f)
     else:
         print(line)
