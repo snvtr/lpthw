@@ -1,7 +1,7 @@
 def build_matrix(string, pattern):
 
     """
-    buils match array
+    builds match array
     """
 
     len_p = len(pattern) + 1 # horizontally
