@@ -1,6 +1,6 @@
 #C:/Python37/python3.exe
 
-# заготовка под pygrep, lmt3thw-ex8
+# lmt3thw-ex8, implementation of grep command
 
 import os, sys
 import argparse, re, fnmatch
@@ -8,11 +8,8 @@ import argparse, re, fnmatch
 # script, pattern, filenames = sys.argv
 
 # план:
-# - реализовать поиск по маске файлов
-# - возможно еще: -n - номер строки, -Р имя файла
-# - запустить цикл по файлам
-# - в цикле сделать проверку на совпадение по glob-у для файлов
-# - далее, если файл подходит под маску, проверять совпадение по re
+# - searches a string against a wildcard filename pattern
+# - options implemented: -n - string number, -Р - filename that contains a matched string
 
 ### __defs__ ###
 
@@ -71,8 +68,8 @@ tree = os.walk('.', topdown=True)
 for i in tree:
     #print('debug:',i)
     if not args.recursive:
-        i[1][:] = [] # зануление массива dirnames приводит к тому, что os.walk не идет вниз по дереву каталогов
+        i[1][:] = [] # clearing this value means that os.walk does not dive into subfolders. Documented performance
     for file in i[2]:
         if check_wildcard(file, args.file_pattern):
-            # тут можно уже разворачивать поиск внутри файла
+            # Here we search for a string in a file:
             rc = grep(i[0]+'\\'+file, args.grep_pattern)
