@@ -1,6 +1,6 @@
 #C:/Python37/python.exe
 
-# lmp3thw, ex5
+# lmp3thw, ex5: implementation of cat command 
 
 import os, sys
 
