@@ -1,6 +1,6 @@
 #!C:/Python37/python3.exe
 
-# выполняет команду s/// подобно sed. Вывод либо в тот же файл, любо на консоль
+# implements s/// command from sed. Outputs into a file or onto a console.
 
 import os, sys, argparse
 import re
