@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+
+# a little exercise on wildcard matching
 
 import os, sys, fnmatch
 
@@ -13,20 +16,12 @@ def try_fnmatch(filename, pattern):
     filename.lstrip('\\')
     
 def check_wildcard(full_filename, pattern):
-    """ проверяет имя переданное в параметрах относительно pattern в args.name """
+    """ checks a filename against the pattern в args.name """
 
-#    if filename.find('\\'):
-#        path_elements = filename.split('\\')
-#    else:
-#        path_elements = [filename]
-#        
-#    if any (fnmatch.fnmatch(path_element, pattern) for path_element in path_elements):
-#        return True
     if fnmatch.fnmatch(full_filename, pattern):
         return True
 
     return False
-    
     
 ### __main__() ###
     
