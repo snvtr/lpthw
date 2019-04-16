@@ -1,11 +1,11 @@
 def build_matrix(string, pattern):
 
     """
-    строит матрицу совпадений
+    buils match array
     """
 
-    len_p = len(pattern) + 1 # размер массива по горизонтали
-    len_s = len(string) + 1  # размер массива по вертикали
+    len_p = len(pattern) + 1 # horizontally
+    len_s = len(string) + 1  # vertically
 
     M = [['.' for s in range(len_s)] for p in range(len_p)]
 
@@ -28,12 +28,11 @@ def build_matrix(string, pattern):
 def decode_matrix(M,string):
 
     """
-    собирает строку в виде списка символов, совпавшую с образом для поиска
+    builds a list that is later converted into a string that matches the pattern
     """
 
-# в считывании массива ошибка. 
-# При считывании строки с '?' надо проверять количество считанных позиций,
-# и учитывать только последнюю
+# here is an error. when error is read, one has to calculate a number of chars for the last positioned '?'
+# at the moment all characters are read and it is necessary to read only one since '?' replaces only one character.
 
     len_s = len(M[0]) - 1
     len_p = len(M) - 1

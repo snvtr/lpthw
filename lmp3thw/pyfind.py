@@ -1,8 +1,8 @@
 #!C:/Python37/python3.exe
 
-# lmp3thw - ex7. исполнение команды find
-# понимает два типа файлов - f/d и маски файлов
-# реализует только функцию -print
+# lmp3thw - ex7. quik and dirty implementation of find command
+# implements to options:  -type f/d and wildcards with */? (but with an error, works wrong when * is the last character in the string)
+# implements only one option: -print
 
 import os, sys
 import argparse
@@ -11,7 +11,7 @@ import fnmatch
 ### __defs__ ###
 
 def check_wildcard(filename, pattern):
-    """ проверяет имя переданное в параметрах относительно pattern в args.name """
+    """ checks a filename if it matches the pattern in args.name """
 
     if filename.find('\\'):
         path_elements = filename.split('\\')

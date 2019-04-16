@@ -1,1 +1,1 @@
-Game with Classes - упражнение из Learn The Python The Hard Way
+A Game, implemented with classes - an exercise from 'Learn The Python The Hard Way'

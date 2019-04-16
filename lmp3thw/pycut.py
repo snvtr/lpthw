@@ -2,13 +2,13 @@ import os, sys, argparse
 
 # lmp3thw ex9:
 #
-# имитация части функционала cut
-# реализует -d -c -f
+# partial implementation of cut command
+# options implemented: -d -c -f
 
 ### __defs__ ###
 
 def parse_cut_params(arg_str):
-    """ заполняет массив для полей которые будут вырезаться """
+    """ fills an array with elements to extract later """
     Temp0 = [0] * 255
     Temp1 = arg_str.split(',')
     
@@ -28,8 +28,8 @@ def parse_cut_params(arg_str):
     return Temp0
 
 def cut_chars(Chars, filename):
-    """ для каждой строки из файла собираем результирующую строку по маске из chars """
-# хорошо было бы тут ловить экспешн на открытии файла
+    """ build the resulting string from charaters set by -c parameter """
+# exception block for file opening is missing
 
     cut_line = []
 
@@ -53,7 +53,7 @@ def cut_chars(Chars, filename):
     return True
 
 def cut_fields(Fields, delim, filename):
-    """ для каждой строки из файла собираем поля порезанные по delim и списку полученных полей из fields """
+    """ build the resulting string from fields split with delim and field list from -f parameter """
 
     cut_line = []
 
