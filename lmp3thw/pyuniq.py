@@ -25,7 +25,6 @@ def pyuniq(args):
         print('Cannot open file %s. Exiting.' % args.FILE)
 
     random_str = random_string()
-#    print(vars(args), random_str)
 
     prev = random_str
     cnt  = 1
@@ -59,6 +58,8 @@ parser.add_argument('-c', '--count', help='count the number of repeating lines',
 parser.add_argument('-u', '--uniq', help='uniq default behaviour, displays unique lines', action='store_true') # does not do anything
 parser.add_argument('FILE', help='File to process, "-" means stdin', action='store')
 args = parser.parse_args()
+
+#print(vars(args))
 
 if __name__ == '__main__':
     print(pyuniq(args))
