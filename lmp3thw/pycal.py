@@ -57,7 +57,7 @@ else:
     params = []
 
 show_year = False
-show_mon  = True
+show_mon  = False # even without params
 
 for i in params:
     if i.lower() == '-y' or i.lower() == '--year':
@@ -76,4 +76,4 @@ if   show_year:
 elif show_mon:
     print(display_mon(today, True))
 else:
-    print('Oops!')
+    print('\nA command line switch is missing.\n\nUsage:\n\t-m, --month: shows the current month\n\t-y, --year: shows the current year')
