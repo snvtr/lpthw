@@ -15,6 +15,7 @@ import os, sys
 def show_list():
 
     for root, dirs, files in os.walk(option_path):
+        print('Current dir: %s' % root)
         for i in sorted(dirs):
             if i.find('.') == 0 and not option_all:
                 continue
@@ -23,7 +24,7 @@ def show_list():
                 f_stat = ''.join([str(st.st_uid),'.',str(st.st_gid),' ',str(oct(st.st_mode & 0o777))[2:]]) 
             else:
                 f_stat = ''
-            print('Dir: %s %s' % (f_stat, i))
+            print('Dir : %15s %s' % (f_stat, i))
 
         for i in sorted(files):
             if i.find('.') == 0 and not option_all:
@@ -33,7 +34,7 @@ def show_list():
                 f_stat = ''.join([str(st.st_uid),'.',str(st.st_gid),' ',str(oct(st.st_mode & 0o777))[2:]]) 
             else:
                 f_stat = ''
-            print('File: %s %s' % (f_stat, i))
+            print('File: %15s %s' % (f_stat, i))
 
         if not option_subd:
             del dirs[:]
